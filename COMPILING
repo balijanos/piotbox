@@ -1,0 +1,11 @@
+Requirements
+============
+lua5.2
+	sudo apt-get install lua5.2 liblua5.2-dev
+wiringPi library
+	sudo apt-get install wiringPi
+OLED library
+	https://github.com/hallard/ArduiPi_OLED
+	modify compiler flags for rpi3 at Makefile
+		CCFLAGS=-Ofast -mfpu=neon-fp-armv8 -mfloat-abi=hard -march=armv8-a+crc -mtune=cortex-a53
+	

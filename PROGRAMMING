@@ -1,0 +1,50 @@
+LUA interface
+=============
+
+	The following functions are called from the pIOTbox core executable.
+	--------------------------------------------------------------------
+	function initialize()
+		Initializes pIOTbox. Called once when the program starts.
+		
+	function finalize()
+		Ends pIOTbox. Called once at end of the program.
+		Should return exit code.
+	
+	
+	These functions can be used in LUA script
+	-----------------------------------------
+	function getButtonState(b)
+		Returns current state of given button. [0-pressed 1-released]
+		example: 
+		  getButtonState(BUTTON0)
+
+	function getAnalogState(c)
+		Returns current value of given analog channel.
+		example: 
+		  getAnalogState(CH0)  
+		  
+	
+	Callback system
+	---------------
+	Callback system easily configurable with LUA. See 'config.lua' script file.
+	Every callback function should return 1 (KEPPRUNNING) to continue execution of core loop.
+	
+	pIOTbox callback (core executable callback in every ~11msec):
+		To cunfigure it different the default (pboxCallBack) just set PBOX_CALLBACK
+		PBOX_CALLBACK = "myCallbackFunc"
+		
+		input parameter(s): none
+		
+		Return 1 to keep looping mode, any other value to exit.
+		
+	Button release event:
+		PBOX_BUTTON_CALLBACK = "buttonCallback"
+		input parameter(s): buttonId, releaseTimeInMilis
+	
+	Encoder rotation event (depends on preconfigured encoder sensitivity):
+		PBOX_ENCODER_CALLBACK = "encoderCallback"
+		input parameter(s): encoderId, signedRotationValue
+	
+	Analog channel change event:
+		PBOX_ANALOG_CALLBACK = "analogCallback"
+		input parameter(s): channelId, newValue

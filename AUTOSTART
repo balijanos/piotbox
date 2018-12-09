@@ -1,0 +1,15 @@
+-- add execute flag to the executables
+chmod +x /<piotbox installdir>/piotbox*
+
+-- edit rc.local
+sudo nano /etc/rc.local
+
+-- add following line at the end of the file before 'exit 0'
+/<piotbox installdir>/piotbox.sh [myprogram.lua]
+
+-- to change the startup lua script you can modify parameter at piotbox.sh too
+# sudo ./piotbox $prm
+sudo ./piotbox examples/test.lua
+
+-- and finally reboot your pi
+

@@ -1,0 +1,77 @@
+External libraries
+------------------
+ArduPi_OLED library by Charles-Henri Hallard (http://hallard.me)
+Roraryencoder by Andrew Stine
+wiringPi by Gordon Henderson (http://wiringpi.com)  
+
+Analog inputs
+-------------
+The software configured for MCP3002 A/D converter but any similar ADC can be used. (see. wiringPi documentation)
+The MCP3002/MCP3008 connects to the Raspberry Pi using a SPI serial connection. 
+To use hardware SPI first make sure you've enabled SPI using the 'raspi-config' tool.
+In this setup pIOTbox uses one channel for an analog potentiomete. The second channel can be used for external analog inputs.
+
+Hardware parts 
+-----------------------------
+2x rotary encoder with switch
+1x 128x64 OLED via I2C
+6x 1k resistor
+6x 10k resistor
+1x 10k B potentiometer
+1x MCP3002 two channel A/D converter
+
+GPIO settings
+-------------
+  - unusable
+  x reserved
+  o free to use
+
+     3.3v                -     -     5v
+     OLED (SDA1)         x     -     5v
+     OLED (SCL1)         x     -     GND
+     BUTTON#3            x     o     GPIO 14
+     GND                 -     o     GPIO 15
+     BUTTON#5            x     o     GPIO 18
+     BUTTON#6            x     -     GND
+     BUTTON#4            x     o     GPIO 23
+     3.3v                -     o     GPIO 24
+     MCP3002 (MOSI)      x     -     GND
+     MCP3002 (MISO)      x     o     GPIO 25
+     MCP3002 (SCLK)      x     x     MCP3002 (CE0)
+     GND                 -     o     GPIO 7
+     GPIO 0              o     o     GPIO 1
+     GPIO 5              o     -     GND
+     GPIO 6              o     o     GPIO 12
+     BUTTON#1 (ROT#1)    x     -     GND
+     BUTTON#2 (ROT#2)    x     x     ROT#1 CLK
+     ROT#2 CLK           x     x     ROT#1 DT
+     GND                 -     x     ROT#2 DT
+
+LUA interface
+-------------
+The following functions are called from the pIOTbox core executable.
+
+function initialize()
+	Initializes pIOTbox. Called once when the program starts
+	
+function finalize()
+	Ends pIOTbox. Called once at end of the program
+	
+function slowButton(b)
+	Called when button released after 1500ms. Call parameter is the button index in [0..max] range
+
+function quickButton(b)
+	Called when button released within 1500ms. Call parameter is the button index in [0..max] range
+
+function rotaryState(r,d)
+	Called when rotaryencoder turned. Call parameter is the rotary index and rotation value.
+
+	
+These functions can be used from LUA subsystem 	
+
+function getButtonState(b)
+    Returns current value of given button.
+	example: 
+	  getButtonState(BUTTON6) - returns 0 if the button is pressed
+
+	  
