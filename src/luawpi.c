@@ -14,7 +14,6 @@
 #include <stdint.h>
 #include "lua.h"
 #include "lauxlib.h"
-#include "compat.h"
 #include <wiringPi.h>
 #include <wiringShift.h>
 #include <wiringPiI2C.h>

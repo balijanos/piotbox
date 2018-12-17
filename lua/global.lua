@@ -39,14 +39,3 @@ pboxCurItem = 1		-- Current menu item
 
 -- Callback function. Usage example at setup.lua/mountDialog function
 pboxMenuCallBack = nil
-----------------------------------------------------------------
--- executes shell command and gets the result
-function cmdLine(cmd)
-	local handle = io.popen(cmd .. " 2>&1")
-	local output = handle:read("*a")
-	handle:close()
-	if (string.len(output)==0) then
-		output = nil
-	end
-	return output
-end

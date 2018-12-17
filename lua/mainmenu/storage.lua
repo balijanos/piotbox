@@ -4,18 +4,10 @@
 -- (c) 2017, Hi-Project Ltd.
 --
 ---------------------------------
-require "lua.global"
+require "lua.utils"
 local display = require "lua.display"
 local menu = require "lua.menu"
 
-local MOUNT_DIR = "/mnt"
-
------------------------------------------------
-function getIPAddress()
-	pboxMode = M_WAIT
-	local ipa = cmdLine("hostname -I") or "Network Error"
-	display.info(ipa)
-end 
 -----------------------------------------------
 local function mountDialog(mountp,usb)
 	local mnt = cmdLine("mount | grep "..mountp)
@@ -44,7 +36,7 @@ function mountCallBack(opt,rot)
 	-- selection was made
 		local r = nil
 		if opt==1 then
-			r = cmdLine("mount "..pboxMenuCallBack.var.mountp.." "..MOUNT_DIR)
+			r = cmdLine("mount "..pboxMenuCallBack.var.mountp.." "..getMountDir())
 			display.info{ pboxMenuCallBack.var.label, "", (r~=nil and "Mount error") or "Mounted" }
 		elseif opt==2 then
 			r = cmdLine("umount "..pboxMenuCallBack.var.mountp)

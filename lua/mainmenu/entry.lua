@@ -7,10 +7,12 @@
 -- setup menu functions
 
 require "lua.mainmenu.power"
-require "lua.mainmenu.setup"
+require "lua.mainmenu.storage"
+require "lua.mainmenu.info"
 
 -- Menu tree
 	local setupMenu = {
+		{ title = "Firmware info", call = "getFirmwareInfo" },
 		{ title = "IP Address", call = "getIPAddress" },
 		{ title = "Storage", call = "getUSBStorage" },
 		{ title = "Shutdown", 

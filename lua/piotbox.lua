@@ -9,6 +9,7 @@ require "lua.config"
 -- system
 require "lua.gpio"
 require "lua.events"
+require "lua.utils"
 ---------------------------------
 -- mainmenu
 require "lua.mainmenu.entry"

@@ -1,10 +1,6 @@
 #include <lua.hpp>
 #include <iostream>
 
-extern "C" {
-	   #include "compat.h"
-}
-
 #include "luadisplay.h"
 
 //LIBRARY FUNCTION

@@ -14,7 +14,6 @@
 #include <vector>
 
 extern "C" {
-	   #include "compat.h"
        #include <wiringPi.h>
        #include <signal.h>
        #include <getopt.h>  
